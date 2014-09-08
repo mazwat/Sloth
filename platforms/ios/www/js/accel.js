@@ -123,7 +123,7 @@
                     moveDials();
 
                 }
-            }, 300);
+            }, 100);
 
     }
 
@@ -194,15 +194,21 @@
         // If task complete - alert the player
             alert("Splendid level of Lethargy\n Well done Human!");
         }
-        // Calling arcTween function of D3 (graph.js) code. to animate arcs
-        outerShape.transition()
-        .duration(2000)
-        .call(arcTweenOuter, lazyDial * τ);
-        //.each("end", _.once(console.log("anim finished")));
 
-        innerShape.transition()
-        .duration(1000)
-        .call(arcTweenInner, pointsDial * τ); 
+        var ln = isNaN(lazyDial);
+
+       if (!ln) { 
+            // Calling arcTween function of D3 (graph.js) code. to animate arcs
+            outerShape.transition()
+            .duration(1000)
+            .call(arcTween, lazyDial * τ, outerArc);
+            //}
+            innerShape.transition()
+            .duration(500)
+            .call(arcTween, pointsDial * τ, innerArc); 
+       }
+
+        
     }
     
     //Once App is started start calculating steps

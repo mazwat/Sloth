@@ -25,14 +25,19 @@ var svg = d3.select("#graph").append("svg")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
 
 // Add the background arc, from 0 to 100% (τ).
-var background = svg.append("path")
+var outerBackground = svg.append("path")
     .datum({endAngle: τ})
     .style("fill", "#ddd")
     .attr("d", outerArc);
 
+var innerBackground = svg.append("path")
+    .datum({endAngle: τ})
+    .style("fill", "#fff")
+    .attr("d", innerArc);
+
 // Add the foreground arc in orange, currently showing 12.7%.
 var outerShape = svg.append("path")
-    .datum({endAngle: .127 * τ})
+    .datum({endAngle: τ})
     .style("fill", "orange")
     .attr("d", outerArc);
 
@@ -52,7 +57,7 @@ var outerShape = svg.append("path")
 
 // Creates a tween on the specified transition's "d" attribute, transitioning
 // any selected arcs from their current angle to the specified new angle.
-function arcTweenOuter(transition, newAngle) {
+function arcTween(transition, newAngle, arcName) {
 
   transition.attrTween("d", function(d) {
 
@@ -62,21 +67,7 @@ function arcTweenOuter(transition, newAngle) {
 
       d.endAngle = interpolate(t);
 
-      return outerArc(d);
-    };
-  });
-}
-function arcTweenInner(transition, newAngle) {
-
-  transition.attrTween("d", function(d) {
-
-    var interpolate = d3.interpolate(d.endAngle, newAngle);
-
-    return function(t) {
-
-      d.endAngle = interpolate(t);
-
-      return innerArc(d);
+      return arcName(d);
     };
   });
 }
