@@ -33,5 +33,9 @@ showGame = function() {
 		var graph = document.getElementById("graph");
 		graph.classList.add('animate');
 		startAccelWatch();
+		var button = document.getElementById("textAnimButton");
+		console.log(button);
+		button.classList.remove('buttonDisplay');
+		button.classList.add('textAnim');
 
 }

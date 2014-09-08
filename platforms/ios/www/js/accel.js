@@ -192,7 +192,7 @@
 
         if (Points > 52) {
         // If task complete - alert the player
-            alert("Splendid level of Lethargy\n Well done Human!");
+            alert("A courageous level of lethargy\n Well done Human!");
         }
 
         var ln = isNaN(lazyDial);
@@ -216,10 +216,10 @@
         // Start processing steps
         stepProcess(acceleration);
         //Show steps on screen
-        document.getElementById('accelerometer').innerHTML = "Activity - " + NumberOfSteps;
+        document.getElementById('accelerometer').innerHTML = "Laziness Rating - " + pointIncr;
         // document.getElementById('feedback').innerHTML = "Accel - " + accelCombiR;
         //document.getElementById('feedback').innerHTML = "Max: " + max + "<br />Min: " + min;
-        document.getElementById('points').innerHTML = "Laziness - " + Points;
+        document.getElementById('points').innerHTML = "Target - " + Points;
         //createGraph();
     }
 
