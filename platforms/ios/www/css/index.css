@@ -53,11 +53,12 @@ body {
     position:absolute;             /* position in the center of the screen */
     left:50%;
     top:10%;
-    height:50px;                   /* text area height */
-    width:225px;                   /* text area width */
+    height:200px;                   /* text area height */
+    width:300px;                   /* text area width */
     text-align:center;
     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
-    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+    margin:-115px 0px 0px -150px;
+      /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
 }
 
@@ -72,15 +73,17 @@ body {
 }
 
 h1 {
-    font-size:70px;
+    width: 300px;
+    font-size:90px;
     font-weight:bold;
     margin:0px;
     overflow:visible;
     padding:0px;
-    text-align:center;
+    /*text-align:center;*/
     line-height:90%;
     /*opacity:0;*/
     height: 200px;
+    letter-spacing: -2px;
 
 
 }
@@ -91,7 +94,7 @@ h1 {
 
 #textAnimButton.buttonDisplay {
     color:#fff; 
-    animation:fade 1500ms 1;
+    animation:fade 100ms 1;
     -webkit-animation:fade 1500ms 1;
     display: block;
     cursor:pointer;
@@ -99,8 +102,8 @@ h1 {
 }
 
 .textAnim.display {
-    animation:blink 3000ms 1;
-    -webkit-animation:blink 3000ms 1; 
+    animation:blink 2300ms 1;
+    -webkit-animation:blink 2300ms 1; 
     display: block;
 }
 
@@ -145,13 +148,13 @@ h1 {
 
 @keyframes blink {
     from { opacity: 0; }
-    40% { opacity: 1; }
+    50% { opacity: 1; }
     to { opacity: 0; }
 }
  
 @-webkit-keyframes blink {
     from { opacity: 0; }
-    40% { opacity: 1; }
+    50% { opacity: 1; }
     to { opacity: 0; }
 }
  
