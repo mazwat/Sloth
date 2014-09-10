@@ -34,7 +34,10 @@ showGame = function() {
 		graph.classList.add('animate');
 		startAccelWatch();
 		var button = document.getElementById("textAnimButton");
-		console.log(button);
+		var character = document.getElementById("character");
+		var shake = document.getElementById("shake");
+		character.classList.add('rise');
+		shake.classList.remove('shake');
 		button.classList.remove('buttonDisplay');
 		button.classList.add('textAnim');
 

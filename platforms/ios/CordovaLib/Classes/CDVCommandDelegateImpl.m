@@ -51,7 +51,7 @@
     }
 
     return [mainBundle pathForResource:filename ofType:@"" inDirectory:directoryStr];
-}
+}   
 
 - (void)evalJsHelper2:(NSString*)js
 {

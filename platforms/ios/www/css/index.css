@@ -108,7 +108,8 @@ h1 {
 }
 
 
-#stats {
+#stats, #graph {
+    margin-top: 220px;
 
 }
 
@@ -116,6 +117,35 @@ h1 {
     font-size:20px;
     color:#FFFFFF;
 }
+
+div#character {
+    margin-top: 350px;
+    margin-left: -20px;
+    animation:emerge 1000ms 1;
+    -webkit-animation:emerge 1000ms 1;
+    
+}
+div#character div.shake {
+    animation:shake 5000ms infinite;
+    -webkit-animation:shake 5000ms infinite;
+}
+div#character.rise {
+    margin-top: 150px;
+    animation:rise 1000ms 1;
+    -webkit-animation:rise 1000ms 1;
+    
+}
+
+#speech {
+    background:url(../img/speech-bubble.svg);
+    position:absolute;             /* position in the center of the screen */
+    left:50px;
+    top:20px;
+    height:180px;                   /* text area height */
+    width:225px;
+}
+
+
 
 .event {
     border-radius:4px;
@@ -156,6 +186,59 @@ h1 {
     from { opacity: 0; }
     50% { opacity: 1; }
     to { opacity: 0; }
+}
+
+@keyframes eyeblink {
+    0%{ opacity: 1; }
+    95% { opacity: 1; }
+    97% { opacity: 0; }
+    100% { opacity: 0; }
+}
+ 
+@-webkit-keyframes eyeblink {
+    0%{ opacity: 1; }
+    95% { opacity: 1; }
+    97% { opacity: 0; }
+    100% { opacity: 0; }
+}
+
+@keyframes shake {
+ 10%{ padding-left: 1px; }
+    25% { padding-top: 2px; }
+    50% { padding-left: 3px; }
+    75% { padding-top: 0px; }
+    100% { padding-left: 0px; }
+}
+ 
+@-webkit-keyframes shake {
+    10%{ padding-left: 1px; }
+    25% { padding-top: 2px; }
+    50% { padding-left: 3px; }
+    75% { padding-top: 0px; }
+    100% { padding-left: 0px; }
+}
+@keyframes emerge {
+    0%{ margin-top: 600px; }
+    100% { margin-top: 350px; }
+}
+ 
+@-webkit-keyframes emerge {
+    0%{ margin-top: 600px; }
+    100% { margin-top: 350px; }
+}
+@keyframes rise {
+    0%{ margin-top: 350px; }
+    100% { margin-top: 350px; }
+}
+ 
+@-webkit-keyframes rise {
+    0%{ margin-top: 350px; }
+    100% { margin-top: 150px; }
+}
+.eyes {
+    animation:eyeblink 3000ms infinite;
+    -webkit-animation:eyeblink 3000ms infinite;
+
 }
  
 #graph {
