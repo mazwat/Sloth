@@ -1,29 +1,24 @@
     // The watch id references the current `watchAcceleration`
 
     var watchIDAccel = null;
-    
-    //var stepSample =[];
-    //var max;
-    //var min;
-    //var accelCombiSample =[];
     var accelCombi = 0;
     var isChange = 0;
     var mOldAccX = 0;
     var mOldAccY = 0;
     var mOldAccZ = 0;
     var NumberOfSteps = 0;
-    //var TotalSteps = 0;
     var Points = 0;
     var pointsSample = [];
     var timer;
     var timerSet = 0;
-    //var countdown;
-    //var countdown_number;
     var accelCombiR;
     var timerSet2 = 0;
     var lazyDial = .1;
     var pointsDial = .1;
     var pointIncr;
+    var time;
+    var countdown;
+    var originalCount;
     
     function startAccelWatch() {
         // Update acceleration every .2 seconds
@@ -55,7 +50,9 @@
             if (!isChange) {
                 isChange = 1;   
                 NumberOfSteps += 1;
+
                 if (Points > 3) {
+                    showBubble("Stop doing things -3 points");
                     Points -= 3;
                     moveDials();
                 } else {
@@ -97,7 +94,7 @@
     function testInactivity() {
 // To test over .3 second intervals whether the player is cheating by leaving the phone on a level surface. Detects minor fluctuations on the acceleration value.
             var beat = setInterval(function(){
-                if (pointsSample.length <= 8) {
+                if (pointsSample.length <= 12) {
                     pointsSample.push(Number(accelCombiR));
                 } else {
                     clearInterval(beat);
@@ -105,6 +102,8 @@
 
                     if (lazy) {
                         //alert("Don't cheat by putting it down!\n You lose 2 points");
+                        showBubble("Don't cheat by putting it down! You lose 2 points");
+                        
                         if (Points > 2) {
                             Points -= 2;
                         } else {
@@ -154,14 +153,16 @@
         //score increment based on small fluctuations in movment
 
         if (avRound > 0.99998) {
-            //alert("score +3");
+            showBubble("Shocking Slobbiness + 5 points");
             return 5;
             
         }
 
         if (avRound >= 0.99995 && avRound <= 0.99998) {
            //alert("score +2");
+           showBubble("Perfect Ponderance + 4 points");
             return 4;
+            
         }
 
         if (avRound >= 0.99993 && avRound < 0.99995) {
@@ -171,7 +172,9 @@
 
         if (avRound >= 0.99991 && avRound < 0.99993) {
            //alert("score +2");
-            return 2;          
+           showBubble("Slovenly effort + 2 points"); 
+            return 2;
+                     
         }
 
         if (avRound < 0.99991) {
@@ -181,46 +184,13 @@
 
     }
 
-    function moveDials() {
-        //Set the outer dial to reflect points bonus
-        var l = ((pointIncr/5)*100)*.01;
-        lazyDial = l.toFixed(2);
-        console.log("lazyDial "+lazyDial);
-        // Set inner dial to new points increment
-        pointsDial = ((Points/50)*100)*.01;
-        console.log("pointsDial "+pointsDial);
-
-        if (Points > 52) {
-        // If task complete - alert the player
-            alert("A courageous level of lethargy\n Well done Human!");
-        }
-
-        var ln = isNaN(lazyDial);
-
-       if (!ln) { 
-            // Calling arcTween function of D3 (graph.js) code. to animate arcs
-            outerShape.transition()
-            .duration(1000)
-            .call(arcTween, lazyDial * τ, outerArc);
-            //}
-            innerShape.transition()
-            .duration(500)
-            .call(arcTween, pointsDial * τ, innerArc); 
-       }
-
-        
-    }
     
     //Once App is started start calculating steps
     function onSuccess(acceleration) {  
         // Start processing steps
         stepProcess(acceleration);
-        //Show steps on screen
-        document.getElementById('accelerometer').innerHTML = "Laziness Rating - " + pointIncr;
-        // document.getElementById('feedback').innerHTML = "Accel - " + accelCombiR;
-        //document.getElementById('feedback').innerHTML = "Max: " + max + "<br />Min: " + min;
-        document.getElementById('points').innerHTML = "Target - " + Points;
-        //createGraph();
+        //Show key on screen
+        //document.getElementById('accelerometer').innerHTML = "Lazy Rating - " + pointIncr;
     }
 
     
@@ -228,3 +198,7 @@
     function onError() {
         alert('Error Acceleration Cannot Be Measured');  
     } 
+
+    function stopAccelWatch() {
+        navigator.accelerometer.clearWatch(watchIDAccel);
+    }

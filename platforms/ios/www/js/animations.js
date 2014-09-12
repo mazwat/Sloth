@@ -1,6 +1,5 @@
 
 //To hide text animation divs once they have played through
-//alert("animation script loaded");
 var animBoxList = document.querySelectorAll('.textAnim');
 var i = 0;
 [].forEach.call(animBoxList, function(animBox) {
@@ -13,11 +12,9 @@ var i = 0;
 
 displayAnim = function() {
 	if (!animBoxList[i]) {
-		var button = document.getElementById("textAnimButton");
-		//console.log(button);
-		//var button = document.getElementsByClassName("textAnimButton");
+		// show the "Start Training" button if we are at the end of the text cycle
+ 		var button = document.getElementById("textAnimButton");
 		button.classList.add('buttonDisplay');
-		//button = button + " buttonDisplay";
 		return
 	}
 	animBoxList[i].classList.add('display');
@@ -26,8 +23,8 @@ displayAnim = function() {
 }
 displayAnim();
 
-
-showGame = function() {
+// Animate the stats and graphs in
+showGame1 = function() {
 		var stats = document.getElementById("stats");
 		stats.classList.add('animate');
 		var graph = document.getElementById("graph");
@@ -40,5 +37,24 @@ showGame = function() {
 		shake.classList.remove('shake');
 		button.classList.remove('buttonDisplay');
 		button.classList.add('textAnim');
+		showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
+		var myTimer = new gameTimer(60);
+        myTimer.attachCallback(function(count) {
+                countdown = count;
+                originalCount = this.originalCount;
+                //console.log(count+" "+originalCount);
+        });
+        myTimer.start();
 
+}
+
+// Show & Hide the tip speech bubble
+showBubble = function(text) {
+		var speech = document.getElementById("speech");
+		speech.classList.add('display');
+		var tail = document.getElementById("tail");
+		tail.innerHTML = text;
+			speech.addEventListener('webkitAnimationEnd',function(event) {
+				speech.classList.remove('display');
+			}, false);
 }

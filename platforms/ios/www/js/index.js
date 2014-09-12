@@ -47,5 +47,11 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+// Stop user from trying to scroll the screen
+window.addEventListener('load', function() {
+    document.body.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    }, false);
+}, false);
 
 

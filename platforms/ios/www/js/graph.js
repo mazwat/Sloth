@@ -7,13 +7,18 @@ var width = 150,
 // SVG path string for a given angle, we pass an object with an endAngle
 // property to the `arc` function, and it will return the corresponding string.
 var outerArc = d3.svg.arc()
-    .innerRadius(45)
+    .innerRadius(44)
     .outerRadius(65)
     .startAngle(0);
 
+var midArc = d3.svg.arc()
+    .innerRadius(25)
+    .outerRadius(44)
+    .startAngle(0);
+
 var innerArc = d3.svg.arc()
-    .innerRadius(35)
-    .outerRadius(45)
+    .innerRadius(12)
+    .outerRadius(25 )
     .startAngle(0);
 
 // Create the SVG container, and apply a transform such that the origin is the
@@ -27,33 +32,34 @@ var svg = d3.select("#graph").append("svg")
 // Add the background arc, from 0 to 100% (τ).
 var outerBackground = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#ddd")
+    .style("fill", "#F2F2F2")
     .attr("d", outerArc);
+
+var midBackground = svg.append("path")
+    .datum({endAngle: τ})
+    .style("fill", "#ddd")
+    .attr("d", midArc);
 
 var innerBackground = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#fff")
+    .style("fill", "#ccc")
     .attr("d", innerArc);
 
-// Add the foreground arc in orange, currently showing 12.7%.
+// Add the foreground arc.
 var outerShape = svg.append("path")
     .datum({endAngle: τ})
     .style("fill", "orange")
     .attr("d", outerArc);
 
+ var midShape = svg.append("path")
+    .datum({endAngle: τ})
+    .style("fill", "#FB3799")
+    .attr("d", midArc);
+
  var innerShape = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#000")
+    .style("fill", "#fff")
     .attr("d", innerArc);
-
-// Every so often, start a transition to a new random angle. Use transition.call
-// (identical to selection.call) so that we can encapsulate the logic for
-// tweening the arc in a separate function below.
-// setInterval(function() {
-//   foreground.transition()
-//       .duration(400)
-//       .call(arcTween, dialMove * τ);  
-// }, 1000);
 
 // Creates a tween on the specified transition's "d" attribute, transitioning
 // any selected arcs from their current angle to the specified new angle.

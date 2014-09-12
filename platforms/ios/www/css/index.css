@@ -94,8 +94,17 @@ h1 {
 
 #textAnimButton.buttonDisplay {
     color:#fff; 
-    animation:fade 100ms 1;
+    animation:fade 1500ms 1;
     -webkit-animation:fade 1500ms 1;
+    display: block;
+    cursor:pointer;
+        
+}
+
+#textAnimButton.buttonDisplayLong {
+    color:#fff; 
+    animation:fade 2000ms 1;
+    -webkit-animation:fade 2000ms 1;
     display: block;
     cursor:pointer;
         
@@ -113,7 +122,7 @@ h1 {
 
 }
 
-#accelerometer, #feedback, #points {
+#key, #feedback, #points {
     font-size:20px;
     color:#FFFFFF;
 }
@@ -135,14 +144,39 @@ div#character.rise {
     -webkit-animation:rise 1000ms 1;
     
 }
+div#character.fall {
+    margin-top: 350px;
+    animation:fall 1000ms 1;
+    -webkit-animation:fall 1000ms 1;
+    
+}
 
 #speech {
-    background:url(../img/speech-bubble.svg);
+   
     position:absolute;             /* position in the center of the screen */
-    left:50px;
-    top:20px;
-    height:180px;                   /* text area height */
-    width:225px;
+    top:0px;   
+    display:none;
+    
+    
+    padding-bottom: 30px;
+    background:url(../img/bubble_tail.svg) no-repeat center bottom;
+    margin: 30px;
+
+}
+
+#tail {
+font-size:28px;
+ padding: 10px;
+ background: #fff;
+ text-align: center;
+ -moz-border-radius: 16px; 
+-webkit-border-radius: 16px; 
+}
+
+#speech.display {
+    animation:inOut 7000ms 1;
+    -webkit-animation:inOut 7000ms 1;
+    display: block;
 }
 
 
@@ -228,20 +262,45 @@ div#character.rise {
 }
 @keyframes rise {
     0%{ margin-top: 350px; }
-    100% { margin-top: 350px; }
+    100% { margin-top: 150px; }
 }
  
 @-webkit-keyframes rise {
     0%{ margin-top: 350px; }
     100% { margin-top: 150px; }
 }
+
+@keyframes fall {
+    0%{ margin-top: 150px; }
+    100% { margin-top: 350px; }
+}
+ 
+@-webkit-keyframes fall {
+    0%{ margin-top: 150px; }
+    100% { margin-top: 350px; }
+}
+
+@keyframes inOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+ 
+@-webkit-keyframes inOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
 .eyes {
     animation:eyeblink 3000ms infinite;
     -webkit-animation:eyeblink 3000ms infinite;
+    fill: orange;
 
 }
  
-#graph {
+#stats {
     margin-top: 5px;
 }
 
