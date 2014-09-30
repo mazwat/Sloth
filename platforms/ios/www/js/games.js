@@ -1,6 +1,7 @@
 
 // Timer for use is games.
 game1Played = 0;
+gameStart = false;
 
 gameTimer = function(count) {
         var self = this;
@@ -27,25 +28,30 @@ gameTimer = function(count) {
         }
 };
 
+
+
+//document.getElementById("textAnimButton").addEventListener("click", showGame1);
+
 // Functions for game 1
-showGame1 = function() {
-		var stats = document.getElementById("stats");
-		stats.classList.add('animate');
-		var graph = document.getElementById("graph");
-		graph.classList.add('animate');
-		startAccelWatch();
-		var button = document.getElementById("textAnimButton");
-		var character = document.getElementById("character");
-		var shake = document.getElementById("shake");
-		character.classList.add('rise');
-		shake.classList.remove('shake');
-		alert(game1Played);	
+showGame = function() {  
+        //alert("pressed");
+        gameStart = true;
+        triggerClassEvent('stats','animate','add');
+        triggerClassEvent('graph','animate','add');
+        triggerClassEvent('textAnimButton','textAnim','add');
+        triggerClassEvent('shake','shake','remove');
+        var character = document.getElementById("character");
+		//alert(game1Played);	
 		if (game1Played > 0) {
-			button.classList.remove('buttonDisplayLong');
+			textAnimButton.classList.remove('buttonDisplayLong');
+            character.classList.remove('fall');
+            Points = 0;
 		} else {
-			button.classList.remove('buttonDisplay');
+			textAnimButton.classList.remove('buttonDisplay');
+            
 		}
-		button.classList.add('textAnim');
+        character.classList.add('rise');
+		startAccelWatch();
 		showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
 		var myTimer = new gameTimer(60);
         myTimer.attachCallback(function(count) {
@@ -54,7 +60,9 @@ showGame1 = function() {
                 //console.log(count+" "+originalCount);
         });
         myTimer.start();
-        game1Played = 0;
+        game1Played++;        
+
+
 
 }
 
@@ -71,9 +79,11 @@ moveDials = function() {
 
     if (countdown == 0 || Points >= 50) {
     // If task complete - alert the player
-		showBubble("A courageous level of lethargy Well done Human! Completed with "+countdown+" seconds to spare");
+		showBubble("A courageous level of lethargy Well done Human! <br><span class='bonus'>Completed with "+countdown+" seconds to spare</span>");
 		endGame1();
-    } else if (countdown == 0 && Points != 50) {
+    }
+    if (countdown == 0 && Points != 50) {
+        // If timer finished but player does not have enough points - alert the player
         showBubble("You need to be faster at doing nothing! Try again!");   
     }
     // Check if value is not NaN before moving the dials
@@ -100,21 +110,17 @@ moveDials = function() {
 
 endGame1 = function() {
 	//hide graphs
-	var graph = document.getElementById("graph");
 	graph.classList.remove('animate');
 	//hide bottom text
-	var stats = document.getElementById("stats");
 	stats.classList.remove('animate');
 	// main character slides down
-	var character = document.getElementById("character");
 	character.classList.remove('rise');
 	character.classList.add('fall');
 	// stop watching the accelerometer
 	stopAccelWatch();
 	// show restart button
-	var button = document.getElementById("textAnimButton");
-	button.classList.add('buttonDisplayLong');
-	button.innerHTML = "Try Again";
+	textAnimButton.classList.add('buttonDisplayLong');
+	textAnimButton.innerHTML = "Try Again";
 
 
 }

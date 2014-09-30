@@ -27,6 +27,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('deviceready', processDB, false);
     },
     // deviceready Event Handler
     //
@@ -47,11 +48,31 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
-// Stop user from trying to scroll the screen
+// Functions to occur on load of the app
 window.addEventListener('load', function() {
+    // Stop user from trying to scroll the screen
     document.body.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, false);
+    // Activate listener for main game start/try again button
+    document.getElementById("textAnimButton").addEventListener('click', showGame);
+
+    document.addEventListener("resume", onResume, false);
+        function onResume() {
+            setTimeout(function() {
+              showBubble("Did I say you could close the app!");
+        }, 0);
+    }
+    // To stop player pressing screen when playing.
+    document.body.addEventListener('touchstart', function(e){
+        if (gameStart) {
+           showBubble("Stop pressing and play!"); 
+        }
+        //alert(e.changedTouches[0].pageX +" "+ e.changedTouches[0].pageY ) // alert pageX coordinate of touch point
+    }, false)
+
+    
+
 }, false);
 
 

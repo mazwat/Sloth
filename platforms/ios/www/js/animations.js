@@ -23,38 +23,40 @@ displayAnim = function() {
 }
 displayAnim();
 
-// Animate the stats and graphs in
-showGame1 = function() {
-		var stats = document.getElementById("stats");
-		stats.classList.add('animate');
-		var graph = document.getElementById("graph");
-		graph.classList.add('animate');
-		startAccelWatch();
-		var button = document.getElementById("textAnimButton");
-		var character = document.getElementById("character");
-		var shake = document.getElementById("shake");
-		character.classList.add('rise');
-		shake.classList.remove('shake');
-		button.classList.remove('buttonDisplay');
-		button.classList.add('textAnim');
-		showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
-		var myTimer = new gameTimer(60);
-        myTimer.attachCallback(function(count) {
-                countdown = count;
-                originalCount = this.originalCount;
-                //console.log(count+" "+originalCount);
-        });
-        myTimer.start();
 
-}
 
 // Show & Hide the tip speech bubble
 showBubble = function(text) {
-		var speech = document.getElementById("speech");
+		// var stats = document.getElementById("stats");
+		// stats.classList.add('blurIn');
+		triggerClassEvent('stats','blurIn','add');
+		triggerClassEvent('graph','blurIn','add');
+		triggerClassEvent('character','blurIn','add');
+		// var graph = document.getElementById("graph");
+		// graph.classList.add('blurIn');
+        var character = document.getElementById("character");
+		character.classList.add('blurIn');
 		speech.classList.add('display');
 		var tail = document.getElementById("tail");
 		tail.innerHTML = text;
 			speech.addEventListener('webkitAnimationEnd',function(event) {
 				speech.classList.remove('display');
+				stats.classList.remove('blurIn');
+				graph.classList.remove('blurIn');
+				character.classList.remove('blurIn');
+				stats.classList.add('blurOut');
+				graph.classList.add('blurOut');
+				character.classList.add('blurOut');
 			}, false);
+}
+
+triggerClassEvent = function(divtarget,cssclass,type) {
+	var divtarget = document.getElementById(divtarget);
+	if (type =='add') {
+		divtarget.classList.add(cssclass);
+	}
+	if (type =='remove') {
+		divtarget.classList.remove(cssclass);
+	}
+	
 }

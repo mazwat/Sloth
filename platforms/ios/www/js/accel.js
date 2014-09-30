@@ -50,9 +50,10 @@
             if (!isChange) {
                 isChange = 1;   
                 NumberOfSteps += 1;
+                showBubble("Please Stop doing things it hurts!<br><span class='bonus'> -3 points</span>");
 
                 if (Points > 3) {
-                    showBubble("Stop doing things -3 points");
+                    
                     Points -= 3;
                     moveDials();
                 } else {
@@ -102,7 +103,7 @@
 
                     if (lazy) {
                         //alert("Don't cheat by putting it down!\n You lose 2 points");
-                        showBubble("Don't cheat by putting it down! You lose 2 points");
+                        showBubble("Don't cheat by putting it down!<br><span class='bonus'>You lose 2 points</span>");
                         
                         if (Points > 2) {
                             Points -= 2;
@@ -153,31 +154,33 @@
         //score increment based on small fluctuations in movment
 
         if (avRound > 0.99998) {
-            showBubble("Shocking Slobbiness + 5 points");
+            showBubble("Shocking slobbery <br><span class='bonus'>+ 5 points</span>");
             return 5;
             
         }
 
         if (avRound >= 0.99995 && avRound <= 0.99998) {
            //alert("score +2");
-           showBubble("Perfect Ponderance + 4 points");
+           showBubble("Slovenly effort <br><span class='bonus'>+ 4 points</span>");
             return 4;
             
         }
 
         if (avRound >= 0.99993 && avRound < 0.99995) {
            //alert("score +2");
+           showBubble("Amazing indifference <br><span class='bonus'>+ 3 points</span>");
             return 3;          
         }
 
         if (avRound >= 0.99991 && avRound < 0.99993) {
            //alert("score +2");
-           showBubble("Slovenly effort + 2 points"); 
+           showBubble("Perfect ponderance <br><span class='bonus'>+ 2 points</span>"); 
             return 2;
                      
         }
 
         if (avRound < 0.99991) {
+            showBubble("Not bad, but stop trying <br><span class='bonus'> + 1 points</span>");
             //alert("score +1");
             return 1;
         }

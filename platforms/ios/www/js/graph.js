@@ -26,23 +26,25 @@ var innerArc = d3.svg.arc()
 var svg = d3.select("#graph").append("svg")
     .attr("width", width)
     .attr("height", height)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+
+    
 
 // Add the background arc, from 0 to 100% (τ).
 var outerBackground = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#F2F2F2")
+    .style("fill", "#ddd")
     .attr("d", outerArc);
 
 var midBackground = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#ddd")
+    .style("fill", "#fff")
     .attr("d", midArc);
 
 var innerBackground = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#ccc")
+    .style("fill", "#ddd")
     .attr("d", innerArc);
 
 // Add the foreground arc.
@@ -58,7 +60,7 @@ var outerShape = svg.append("path")
 
  var innerShape = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#fff")
+    .style("fill", "#666")
     .attr("d", innerArc);
 
 // Creates a tween on the specified transition's "d" attribute, transitioning
@@ -77,3 +79,38 @@ function arcTween(transition, newAngle, arcName) {
     };
   });
 }
+
+
+// code for bounce
+
+// var box = d3.select("#frame")
+//           .append("svg")
+//           .attr("width", 900)
+//           .attr("height", 600);
+
+// box.append("circle")
+//    .style("stroke", "white")
+//    .attr("r", 40)
+//    .attr("cx", 150)
+//    .attr("cy", 150)
+//    .on("mouseover", bounce);
+   //.on("mouseout", bounce);
+
+// function bounce() {
+//   alert("object rollover: "+this);
+//   d3.select(this)
+//     .transition()
+//     .attr("r", r+10)
+//     .duration(200)
+//     .ease("cubic-out")
+//     .each("end", bounceBack);
+// }
+
+// function bounceBack() {
+//     d3.select(this)
+//        .transition()
+//        .attr("r", 150)
+//        .duration(200)
+//        .ease("cubic-out");
+// }
+
