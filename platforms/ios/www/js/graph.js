@@ -51,6 +51,7 @@ var innerBackground = svg.append("path")
 var outerShape = svg.append("path")
     .datum({endAngle: τ})
     .style("fill", "orange")
+    .style("stroke-linecap", "round")
     .attr("d", outerArc);
 
  var midShape = svg.append("path")

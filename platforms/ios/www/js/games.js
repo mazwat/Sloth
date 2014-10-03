@@ -36,31 +36,47 @@ gameTimer = function(count) {
 showGame = function() {  
         //alert("pressed");
         gameStart = true;
-        triggerClassEvent('stats','animate','add');
-        triggerClassEvent('graph','animate','add');
-        triggerClassEvent('textAnimButton','textAnim','add');
         triggerClassEvent('shake','shake','remove');
         var character = document.getElementById("character");
+        
+        
+        
 		//alert(game1Played);	
 		if (game1Played > 0) {
-			textAnimButton.classList.remove('buttonDisplayLong');
-            character.classList.remove('fall');
+			textAnimButton.classList.remove('buttonDisplayLower');
+            character.classList.remove('fallSlightly');
+            character.classList.add('riseSlightly');
+            character.addEventListener('webkitAnimationEnd',function(event) {
+                triggerClassEvent('stats','animate','add');
+                triggerClassEvent('graph','animate','add');
+                triggerClassEvent('textAnimButton','textAnim','add');
+            }, false);
             Points = 0;
 		} else {
 			textAnimButton.classList.remove('buttonDisplay');
+            character.classList.add('rise');
+            character.addEventListener('webkitAnimationEnd',function(event) {
+                triggerClassEvent('stats','animate','add');
+                triggerClassEvent('graph','animate','add');
+                triggerClassEvent('textAnimButton','textAnim','add');
+            }, false);
             
 		}
-        character.classList.add('rise');
+        
 		startAccelWatch();
+
 		showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
+
 		var myTimer = new gameTimer(60);
         myTimer.attachCallback(function(count) {
                 countdown = count;
                 originalCount = this.originalCount;
                 //console.log(count+" "+originalCount);
         });
+
         myTimer.start();
-        game1Played++;        
+        game1Played++; 
+        bounceGraph();       
 
 
 
@@ -108,18 +124,21 @@ moveDials = function() {
 }
 
 
+
+
 endGame1 = function() {
 	//hide graphs
 	graph.classList.remove('animate');
 	//hide bottom text
 	stats.classList.remove('animate');
-	// main character slides down
+	// main character slides down slightly
 	character.classList.remove('rise');
-	character.classList.add('fall');
+	character.classList.add('fallSlightly');
 	// stop watching the accelerometer
 	stopAccelWatch();
 	// show restart button
-	textAnimButton.classList.add('buttonDisplayLong');
+	textAnimButton.classList.add('buttonDisplayLower');
+
 	textAnimButton.innerHTML = "Try Again";
 
 

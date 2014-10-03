@@ -137,6 +137,16 @@ h1 {
         
 }
 
+#textAnimButton.buttonDisplayLower {
+    color:#fff; 
+    animation:fade 1500ms 1;
+    -webkit-animation:fade 1500ms 1;
+    display: block;
+    margin-top: 250px;
+    cursor:pointer;
+        
+}
+
 .textAnim.display {
     animation:blink 2000ms 1;
     -webkit-animation:blink 2000ms 1; 
@@ -150,15 +160,12 @@ h1 {
   -webkit-animation: blurOut 1000ms 1;
 }
 
-@-webkit-keyframes blurIn {
-  0%  { -webkit-filter: blur(0px); }
-  100% { -webkit-filter: blur(1px); }
-}
-@-webkit-keyframes blurOut {
-  0%  { -webkit-filter: blur(1px); }
-  100% { -webkit-filter: blur(0px); }
-}
 
+
+.bounce {    
+    -webkit-animation:  scaleInOut 400ms 1 ease-out;
+    animation:          scaleInOut 400ms 1 ease-out;
+}
 
 #stats, #graph {
     margin-top: 220px;
@@ -171,7 +178,7 @@ h1 {
 }
 
 div#character {
-    margin-top: 350px;
+    margin-top: 475px;
     margin-left: -20px;
     animation:emerge 1000ms 1;
     -webkit-animation:emerge 1000ms 1;
@@ -184,16 +191,29 @@ div#character div.shake {
 }
 div#character.rise {
     margin-top: 150px;
-    animation:rise 1000ms 1;
-    -webkit-animation:rise 1000ms 1;
+    animation:rise 1000ms 1 ease-out;
+    -webkit-animation:rise 1000ms 1 ease-out;
     
 }
 div#character.fall {
-    margin-top: 350px;
-    animation:fall 1000ms 1;
-    -webkit-animation:fall 1000ms 1;
+    margin-top: 475px;
+    animation:fall 1000ms 1 ease-out;
+    -webkit-animation:fall 1000ms 1 ease-out;
     
 }
+div#character.fallSlightly {
+    margin-top: 200px;
+    animation:fallSlightly 600ms 1 ease-out;
+    -webkit-animation:fallSlightly 600ms 1 ease-out;
+    
+}
+div#character.riseSlightly {
+    margin-top: 150px;
+    animation:riseSlightly 1000ms 1 ease-out;
+    -webkit-animation:riseSlightly 1000ms 1 ease-out;
+    
+}
+
 
 #speech {
    
@@ -222,8 +242,8 @@ color: #666;
 }
 
 #speech.display {
-    animation:inOut 20000ms 1;
-    -webkit-animation:inOut 20000ms 1;
+    animation:inOut 5000ms 1;
+    -webkit-animation:inOut 5000ms 1;
     display: block;
 }
 
@@ -246,6 +266,25 @@ color: #666;
 .event.received {
     background-color:#000;
     display:none;
+}
+
+@keyframes blurIn {
+    0%{ filter: blur(0px); }
+    100% { filter: blur(1px); }
+}
+
+@-webkit-keyframes blurIn {
+  0%  { -webkit-filter: blur(0px); }
+  100% { -webkit-filter: blur(1px); }
+}
+
+@keyframes blurIn {
+    0%{ ffilter: blur(1px); }
+    100% { filter: blur(0px); }
+}
+@-webkit-keyframes blurOut {
+  0%  { -webkit-filter: blur(1px); }
+  100% { -webkit-filter: blur(0px); }
 }
 
 @keyframes fade {
@@ -301,12 +340,12 @@ color: #666;
 }
 @keyframes emerge {
     0%{ margin-top: 600px; }
-    100% { margin-top: 350px; }
+    100% { margin-top: 475px; }
 }
  
 @-webkit-keyframes emerge {
     0%{ margin-top: 600px; }
-    100% { margin-top: 350px; }
+    100% { margin-top: 475px; }
 }
 @keyframes rise {
     0%{ margin-top: 350px; }
@@ -318,14 +357,35 @@ color: #666;
     100% { margin-top: 150px; }
 }
 
+@keyframes riseSlightly {
+    0%{ margin-top: 200px; }
+    100% { margin-top: 150px; }
+}
+ 
+@-webkit-keyframes riseSlightly {
+    0%{ margin-top: 200px; }
+    100% { margin-top: 150px; }
+}
+
+
 @keyframes fall {
     0%{ margin-top: 150px; }
-    100% { margin-top: 350px; }
+    100% { margin-top: 475px; }
 }
  
 @-webkit-keyframes fall {
     0%{ margin-top: 150px; }
-    100% { margin-top: 350px; }
+    100% { margin-top: 475px; }
+}
+
+@keyframes fallSlightly {
+    0%{ margin-top: 150px; }
+    100% { margin-top: 200px; }
+}
+ 
+@-webkit-keyframes fallSlightly {
+    0%{ margin-top: 150px; }
+    100% { margin-top: 200px; }
 }
 
 @keyframes inOut {
@@ -333,6 +393,17 @@ color: #666;
     20% { opacity: 1; }
     80% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@-webkit-keyframes scaleInOut {
+    0% { -webkit-transform:scale(1,1); }
+    50% { -webkit-transform:scale(1.1,1.1); }
+    100% { -webkit-transform:scale(1,1); }
+}
+
+@keyframes scaleInOut {
+    0% { transform:scale(1,1); }
+    50% { transform:scale(1.1,1.1); }
 }
  
 @-webkit-keyframes inOut {

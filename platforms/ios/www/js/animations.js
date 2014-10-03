@@ -29,24 +29,24 @@ displayAnim();
 showBubble = function(text) {
 		// var stats = document.getElementById("stats");
 		// stats.classList.add('blurIn');
-		triggerClassEvent('stats','blurIn','add');
-		triggerClassEvent('graph','blurIn','add');
-		triggerClassEvent('character','blurIn','add');
+		//triggerClassEvent('stats','blurIn','add');
+		//triggerClassEvent('graph','blurIn','add');
+		//triggerClassEvent('character','blurIn','add');
 		// var graph = document.getElementById("graph");
 		// graph.classList.add('blurIn');
-        var character = document.getElementById("character");
-		character.classList.add('blurIn');
+        //var character = document.getElementById("character");
+		//character.classList.add('blurIn');
 		speech.classList.add('display');
 		var tail = document.getElementById("tail");
 		tail.innerHTML = text;
 			speech.addEventListener('webkitAnimationEnd',function(event) {
 				speech.classList.remove('display');
-				stats.classList.remove('blurIn');
-				graph.classList.remove('blurIn');
-				character.classList.remove('blurIn');
-				stats.classList.add('blurOut');
-				graph.classList.add('blurOut');
-				character.classList.add('blurOut');
+				//stats.classList.remove('blurIn');
+				//graph.classList.remove('blurIn');
+				//character.classList.remove('blurIn');
+				//stats.classList.add('blurOut');
+				//graph.classList.add('blurOut');
+				//character.classList.add('blurOut');
 			}, false);
 }
 
@@ -59,4 +59,15 @@ triggerClassEvent = function(divtarget,cssclass,type) {
 		divtarget.classList.remove(cssclass);
 	}
 	
+}
+
+bounceGraph = function() {
+    var graph = document.getElementById("graph");
+    var svgList = graph.getElementsByTagName('svg');
+    var svgBox = svgList[0];
+	svgBox.classList.add('bounce');
+	svgBox.addEventListener('webkitAnimationEnd',function(event) {
+		svgBox.classList.remove('bounce');
+	}, false);
+
 }
