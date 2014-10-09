@@ -1,4 +1,3 @@
-
 //To hide text animation divs once they have played through
 var animBoxList = document.querySelectorAll('.textAnim');
 var i = 0;
@@ -23,31 +22,17 @@ displayAnim = function() {
 }
 displayAnim();
 
-
-
 // Show & Hide the tip speech bubble
 showBubble = function(text) {
-		// var stats = document.getElementById("stats");
-		// stats.classList.add('blurIn');
-		//triggerClassEvent('stats','blurIn','add');
-		//triggerClassEvent('graph','blurIn','add');
-		//triggerClassEvent('character','blurIn','add');
-		// var graph = document.getElementById("graph");
-		// graph.classList.add('blurIn');
-        //var character = document.getElementById("character");
-		//character.classList.add('blurIn');
-		speech.classList.add('display');
-		var tail = document.getElementById("tail");
-		tail.innerHTML = text;
-			speech.addEventListener('webkitAnimationEnd',function(event) {
-				speech.classList.remove('display');
-				//stats.classList.remove('blurIn');
-				//graph.classList.remove('blurIn');
-				//character.classList.remove('blurIn');
-				//stats.classList.add('blurOut');
-				//graph.classList.add('blurOut');
-				//character.classList.add('blurOut');
-			}, false);
+	speech.classList.add('display');
+	var tail = document.getElementById("tail");
+	tail.innerHTML = text;
+		speech.addEventListener('webkitAnimationEnd',function(event) {
+			speech.classList.remove('display');
+			outerShape.transition()
+        	.duration(1000)
+        	.call(arcTween, 0 * τ, outerArc);
+		}, false);
 }
 
 triggerClassEvent = function(divtarget,cssclass,type) {
@@ -57,8 +42,7 @@ triggerClassEvent = function(divtarget,cssclass,type) {
 	}
 	if (type =='remove') {
 		divtarget.classList.remove(cssclass);
-	}
-	
+	}	
 }
 
 bounceGraph = function() {
@@ -69,5 +53,4 @@ bounceGraph = function() {
 	svgBox.addEventListener('webkitAnimationEnd',function(event) {
 		svgBox.classList.remove('bounce');
 	}, false);
-
 }

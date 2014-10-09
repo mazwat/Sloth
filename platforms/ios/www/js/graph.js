@@ -1,24 +1,30 @@
 
-var width = 150,
-    height = 150,
+var width = 180,
+    height = 180,
     τ = 2 * Math.PI; // http://tauday.com/tau-manifesto
 
 // An arc function with all values bound except the endAngle. So, to compute an
 // SVG path string for a given angle, we pass an object with an endAngle
 // property to the `arc` function, and it will return the corresponding string.
+var backgroundArc = d3.svg.arc()
+     .innerRadius(5)
+     .outerRadius(85)
+     .startAngle(0);
+
+
 var outerArc = d3.svg.arc()
-    .innerRadius(44)
-    .outerRadius(65)
+    .innerRadius(60)
+    .outerRadius(80)
     .startAngle(0);
 
 var midArc = d3.svg.arc()
-    .innerRadius(25)
-    .outerRadius(44)
+    .innerRadius(35)
+    .outerRadius(55)
     .startAngle(0);
 
 var innerArc = d3.svg.arc()
-    .innerRadius(12)
-    .outerRadius(25 )
+    .innerRadius(10)
+    .outerRadius(30)
     .startAngle(0);
 
 // Create the SVG container, and apply a transform such that the origin is the
@@ -32,26 +38,16 @@ var svg = d3.select("#graph").append("svg")
     
 
 // Add the background arc, from 0 to 100% (τ).
-var outerBackground = svg.append("path")
-    .datum({endAngle: τ})
-    .style("fill", "#ddd")
-    .attr("d", outerArc);
-
-var midBackground = svg.append("path")
-    .datum({endAngle: τ})
-    .style("fill", "#fff")
-    .attr("d", midArc);
-
-var innerBackground = svg.append("path")
-    .datum({endAngle: τ})
-    .style("fill", "#ddd")
-    .attr("d", innerArc);
+ var outerBackground = svg.append("path")
+     .datum({endAngle: τ})
+     .style("fill", "#222")
+     .attr("d", backgroundArc);
 
 // Add the foreground arc.
 var outerShape = svg.append("path")
     .datum({endAngle: τ})
     .style("fill", "orange")
-    .style("stroke-linecap", "round")
+    //.style("stroke-linecap", "round")
     .attr("d", outerArc);
 
  var midShape = svg.append("path")

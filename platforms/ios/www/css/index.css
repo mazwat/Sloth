@@ -62,7 +62,7 @@ body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#FB3799;   
+    background:#FB3799; /*url(../img/bg.png);*/   
     background-attachment:fixed;
     font-family:'face_your_fearsregular', Helvetica, Arial, sans-serif;
     font-size:12px;
@@ -178,7 +178,7 @@ h1 {
 }
 
 div#character {
-    margin-top: 475px;
+    margin-top: 505px;
     margin-left: -45px;
     animation:emerge 1000ms 1;
     -webkit-animation:emerge 1000ms 1;
@@ -189,36 +189,33 @@ div#character div.shake {
     animation:shake 5000ms infinite;
     -webkit-animation:shake 5000ms infinite;
 }
+
 div#character.rise {
     margin-top: 150px;
-    animation:rise 1000ms 1 ease-out;
-    -webkit-animation:rise 1000ms 1 ease-out;
-    
+    animation:rise 1500ms 1;
+    -webkit-animation:rise 1500ms 1;   
 }
+
 div#character.fall {
-    margin-top: 475px;
+    margin-top: 505px;
     animation:fall 1000ms 1 ease-out;
-    -webkit-animation:fall 1000ms 1 ease-out;
-    
+    -webkit-animation:fall 1000ms 1 ease-out;    
 }
+
 div#character.fallSlightly {
     margin-top: 200px;
     animation:fallSlightly 600ms 1 ease-out;
-    -webkit-animation:fallSlightly 600ms 1 ease-out;
-    
+    -webkit-animation:fallSlightly 600ms 1 ease-out;    
 }
+
 div#character.riseSlightly {
     margin-top: 150px;
     animation:riseSlightly 1000ms 1 ease-out;
-    -webkit-animation:riseSlightly 1000ms 1 ease-out;
-    
+    -webkit-animation:riseSlightly 1000ms 1 ease-out;    
 }
 
-
-#speech {
-   
-    position:absolute; 
-               /* position in the center of the screen */
+#speech {   
+    position:absolute;       /* position in the center of the screen */
     top:20px;  
     left: 10%;
     right: 10%; 
@@ -323,29 +320,15 @@ color: #666;
     100% { opacity: 0; }
 }
 
-@keyframes shake {
- 10%{ padding-left: 1px; }
-    25% { padding-top: 2px; }
-    50% { padding-left: 3px; }
-    75% { padding-top: 0px; }
-    100% { padding-left: 0px; }
-}
- 
-@-webkit-keyframes shake {
-    10%{ padding-left: 1px; }
-    25% { padding-top: 2px; }
-    50% { padding-left: 3px; }
-    75% { padding-top: 0px; }
-    100% { padding-left: 0px; }
-}
+
 @keyframes emerge {
     0%{ margin-top: 600px; }
-    100% { margin-top: 475px; }
+    100% { margin-top: 505px; }
 }
  
 @-webkit-keyframes emerge {
     0%{ margin-top: 600px; }
-    100% { margin-top: 475px; }
+    100% { margin-top: 505px; }
 }
 @keyframes rise {
     0%{ margin-top: 350px; }
@@ -370,12 +353,12 @@ color: #666;
 
 @keyframes fall {
     0%{ margin-top: 150px; }
-    100% { margin-top: 475px; }
+    100% { margin-top: 505px; }
 }
  
 @-webkit-keyframes fall {
     0%{ margin-top: 150px; }
-    100% { margin-top: 475px; }
+    100% { margin-top: 505px; }
 }
 
 @keyframes fallSlightly {
@@ -416,7 +399,6 @@ color: #666;
     animation:eyeblink 3000ms infinite;
     -webkit-animation:eyeblink 3000ms infinite;
     fill: orange;
-
 }
  
 #stats {

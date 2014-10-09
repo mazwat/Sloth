@@ -36,47 +36,48 @@ gameTimer = function(count) {
 showGame = function() {  
         //alert("pressed");
         gameStart = true;
-        triggerClassEvent('shake','shake','remove');
         var character = document.getElementById("character");
-        
-        
-        
-		//alert(game1Played);	
-		if (game1Played > 0) {
-			textAnimButton.classList.remove('buttonDisplayLower');
+        //alert(game1Played);
+        // To check whether the game has been played before	
+		if (game1Played == 0) {
+			triggerClassEvent('shake','shake','remove');
+            textAnimButton.classList.remove('buttonDisplay');
+            character.classList.add('rise');
+            character.addEventListener('webkitAnimationEnd',function(event) {
+                triggerClassEvent('stats','animate','add');
+                triggerClassEvent('graph','animate','add');
+                triggerClassEvent('textAnimButton','textAnim','add');
+                //alert ("first" + game1Played);
+                showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
+            }, false);
+		} else {
+            textAnimButton.classList.remove('buttonDisplayLower');
             character.classList.remove('fallSlightly');
             character.classList.add('riseSlightly');
             character.addEventListener('webkitAnimationEnd',function(event) {
                 triggerClassEvent('stats','animate','add');
                 triggerClassEvent('graph','animate','add');
                 triggerClassEvent('textAnimButton','textAnim','add');
-            }, false);
-            Points = 0;
-		} else {
-			textAnimButton.classList.remove('buttonDisplay');
-            character.classList.add('rise');
-            character.addEventListener('webkitAnimationEnd',function(event) {
-                triggerClassEvent('stats','animate','add');
-                triggerClassEvent('graph','animate','add');
-                triggerClassEvent('textAnimButton','textAnim','add');
-            }, false);
-            
+                //alert ("more than one" + game1Played);
+                showBubble("Ok, concentrate this time, you can do it!");
+            }, false);  
 		}
-        
 		startAccelWatch();
-
-		showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
 
 		var myTimer = new gameTimer(60);
         myTimer.attachCallback(function(count) {
                 countdown = count;
                 originalCount = this.originalCount;
-                //console.log(count+" "+originalCount);
+                // Set time to fraction of 1
+                timefraction = ((countdown/originalCount)*100)*.01;
+                timefractionR = timefraction.toFixed(2);
+                // aninmate graph to reflect countdown value
+                innerShape.transition()
+                .duration(500)
+                .call(arcTween, timefractionR * τ, innerArc); 
         });
-
         myTimer.start();
-        game1Played++; 
-        bounceGraph();       
+        game1Played++;       
 
 
 
@@ -88,19 +89,16 @@ moveDials = function() {
     lazyDial = l.toFixed(2);
     // Set inner dial to new points increment
     pointsDial = ((Points/50)*100)*.01;
-    // Set time to fraction of 1
-    timefraction = ((countdown/originalCount)*100)*.01;
-    timefractionR = timefraction.toFixed(2);
-
 
     if (countdown == 0 || Points >= 50) {
     // If task complete - alert the player
 		showBubble("A courageous level of lethargy Well done Human! <br><span class='bonus'>Completed with "+countdown+" seconds to spare</span>");
-		endGame1();
+		endGameOne();
     }
     if (countdown == 0 && Points != 50) {
         // If timer finished but player does not have enough points - alert the player
-        showBubble("You need to be faster at doing nothing! Try again!");   
+        showBubble("You need to be faster at doing nothing! Try again!");
+        endGameOne();   
     }
     // Check if value is not NaN before moving the dials
     var ln = isNaN(lazyDial);
@@ -114,19 +112,11 @@ moveDials = function() {
         midShape.transition()
         .duration(500)
         .call(arcTween, pointsDial * τ, midArc);
-
-        innerShape.transition()
-        .duration(500)
-        .call(arcTween, timefractionR * τ, innerArc);  
-   }
-
-        
+ 
+   }        
 }
 
-
-
-
-endGame1 = function() {
+endGameOne = function() {
 	//hide graphs
 	graph.classList.remove('animate');
 	//hide bottom text
@@ -138,8 +128,11 @@ endGame1 = function() {
 	stopAccelWatch();
 	// show restart button
 	textAnimButton.classList.add('buttonDisplayLower');
-
-	textAnimButton.innerHTML = "Try Again";
-
-
+    if (Points != 50) {
+        textAnimButton.innerHTML = "Try Again";
+    } else {
+        textAnimButton.innerHTML = "Next";
+    }
+    Points = 0;
+    gameStart = false;
 }

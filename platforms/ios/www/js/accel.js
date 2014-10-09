@@ -95,7 +95,7 @@
     function testInactivity() {
 // To test over .3 second intervals whether the player is cheating by leaving the phone on a level surface. Detects minor fluctuations on the acceleration value.
             var beat = setInterval(function(){
-                if (pointsSample.length <= 12) {
+                if (pointsSample.length <= 24) {
                     pointsSample.push(Number(accelCombiR));
                 } else {
                     clearInterval(beat);
@@ -104,7 +104,7 @@
                     if (lazy) {
                         //alert("Don't cheat by putting it down!\n You lose 2 points");
                         showBubble("Don't cheat by putting it down!<br><span class='bonus'>You lose 2 points</span>");
-                        
+                        // Stop the points going into minus figures
                         if (Points > 2) {
                             Points -= 2;
                         } else {
@@ -141,7 +141,7 @@
     }
 
     function average_array(my_array) {
-        // to calculate the amount to increment the score by, based by how much movment is detected - less movement more points.
+        // to calculate the amount to increment the score by, based by how much movement is detected - less movement more points.
         var sum = my_array.reduce(add, 0);
 
         function add(a, b) {
