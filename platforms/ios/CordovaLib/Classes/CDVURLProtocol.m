@@ -27,7 +27,8 @@
 #import "CDVViewController.h"
 
 @interface CDVHTTPURLResponse : NSHTTPURLResponse
-@property (nonatomic) NSInteger statusCode;
+//@property (nonatomic) NSInteger statusCode;
+@property(readonly) NSInteger statusCode;
 @end
 
 static CDVWhitelist* gWhitelist = nil;
@@ -209,7 +210,12 @@ static CDVViewController *viewControllerForRequest(NSURLRequest* request)
                                        MIMEType:mimeType
                           expectedContentLength:[data length]
                                textEncodingName:encodingName];
-    response.statusCode = statusCode;
+    //response.statusCode = statusCode;
+    
+    #ifndef __IPHONE_8_0
+        response.statusCode = statusCode;
+    #endif
+
 
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
     if (data != nil) {

@@ -1,12 +1,7 @@
 
 
-    // Wait for device API libraries to load
-    //
-    
 
-    // Populate the database
-    //
-    function populateDB(tx) {
+     function populateDB(tx) {
         tx.executeSql('DROP TABLE IF EXISTS DEMO');
         tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
         tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');

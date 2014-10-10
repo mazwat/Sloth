@@ -1,4 +1,4 @@
-//To hide text animation divs once they have played through
+//To hide intro text animation divs once they have played through
 var animBoxList = document.querySelectorAll('.textAnim');
 var i = 0;
 [].forEach.call(animBoxList, function(animBox) {
@@ -11,7 +11,7 @@ var i = 0;
 
 displayAnim = function() {
 	if (!animBoxList[i]) {
-		// show the "Start Training" button if we are at the end of the text cycle
+		// show the "Start Training" button if we are at the end of the intro text cycle
  		var button = document.getElementById("textAnimButton");
 		button.classList.add('buttonDisplay');
 		return
@@ -22,6 +22,7 @@ displayAnim = function() {
 }
 displayAnim();
 
+
 // Show & Hide the tip speech bubble
 showBubble = function(text) {
 	speech.classList.add('display');
@@ -29,9 +30,7 @@ showBubble = function(text) {
 	tail.innerHTML = text;
 		speech.addEventListener('webkitAnimationEnd',function(event) {
 			speech.classList.remove('display');
-			outerShape.transition()
-        	.duration(1000)
-        	.call(arcTween, 0 * τ, outerArc);
+			moveDials(outerShape, 0, outerArc);
 		}, false);
 }
 

@@ -41,7 +41,6 @@
         
         accelCombi /= (a * b);
         accelCombiR = accelCombi.toFixed(4); 
-        
         //Get max and min values of accel with function
         
         if (accelCombi <= 0.994 && accelCombi > 0.90) { // bounce calibration
@@ -55,10 +54,10 @@
                 if (Points > 3) {
                     
                     Points -= 3;
-                    moveDials();
+                    setDials();
                 } else {
                     Points = 0;
-                    moveDials();
+                    setDials();
                 }
             } else {
                 isChange = 0;
@@ -120,7 +119,7 @@
                     timerSet2 = 0; 
                     pointsSample = [];
 
-                    moveDials();
+                    setDials();
 
                 }
             }, 100);
@@ -151,7 +150,7 @@
         var average = sum/my_array.length;
         var avRound = average.toFixed(5);
 
-        //score increment based on small fluctuations in movment
+        //score increment based on small fluctuations in movement
 
         if (avRound > 0.99998) {
             bounceGraph();
@@ -163,24 +162,21 @@
 
         if (avRound >= 0.99995 && avRound <= 0.99998) {
             bounceGraph();
-           //alert("score +2");
-           showBubble("Slovenly effort <br><span class='bonus'>+ 4 points</span>");
+            showBubble("Slovenly effort <br><span class='bonus'>+ 4 points</span>");
             return 4;
             
         }
 
         if (avRound >= 0.99993 && avRound < 0.99995) {
-           //alert("score +2");
-           bounceGraph();
-           showBubble("Amazing indifference <br><span class='bonus'>+ 3 points</span>");
+            bounceGraph();
+            showBubble("Amazing indifference <br><span class='bonus'>+ 3 points</span>");
             return 3;
                      
         }
 
         if (avRound >= 0.99991 && avRound < 0.99993) {
-           //alert("score +2");
-           bounceGraph();
-           showBubble("Perfect ponderance <br><span class='bonus'>+ 2 points</span>"); 
+            bounceGraph();
+            showBubble("Perfect ponderance <br><span class='bonus'>+ 2 points</span>"); 
             return 2;
                      
         }
@@ -188,8 +184,6 @@
         if (avRound < 0.99991) {
             bounceGraph();
             showBubble("Not bad, but stop trying <br><span class='bonus'> + 1 points</span>");
-            //alert("score +1");
-            
             return 1;
 
         }

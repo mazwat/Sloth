@@ -57,7 +57,7 @@ var outerShape = svg.append("path")
 
  var innerShape = svg.append("path")
     .datum({endAngle: τ})
-    .style("fill", "#666")
+    .style("fill", "#971D9B")
     .attr("d", innerArc);
 
 // Creates a tween on the specified transition's "d" attribute, transitioning

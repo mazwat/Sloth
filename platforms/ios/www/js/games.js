@@ -1,6 +1,7 @@
 
 // Timer for use is games.
-game1Played = 0;
+played = 1;
+game = 0;
 gameStart = false;
 
 gameTimer = function(count) {
@@ -33,13 +34,20 @@ gameTimer = function(count) {
 //document.getElementById("textAnimButton").addEventListener("click", showGame1);
 
 // Functions for game 1
-showGame = function() {  
-        //alert("pressed");
+showGame = function() {
+        game = 1;
+        console.log("game: "+game+" attempt: "+played);
+        
+        moveDials(innerShape, 0, innerArc);
+        moveDials(midShape, 0, midArc);
+        moveDials(outerShape, 0, outerArc);  
+        console.log("pressed");
         gameStart = true;
         var character = document.getElementById("character");
         //alert(game1Played);
         // To check whether the game has been played before	
-		if (game1Played == 0) {
+		if (played == 1) {
+            console.log("first");
 			triggerClassEvent('shake','shake','remove');
             textAnimButton.classList.remove('buttonDisplay');
             character.classList.add('rise');
@@ -51,20 +59,25 @@ showGame = function() {
                 showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
             }, false);
 		} else {
+            
             textAnimButton.classList.remove('buttonDisplayLower');
             character.classList.remove('fallSlightly');
             character.classList.add('riseSlightly');
             character.addEventListener('webkitAnimationEnd',function(event) {
-                triggerClassEvent('stats','animate','add');
-                triggerClassEvent('graph','animate','add');
+                //triggerClassEvent('stats','animate','add');
+                //triggerClassEvent('graph','animate','add');
+                graph.classList.add('animate');
+                stats.classList.add('animate');
                 triggerClassEvent('textAnimButton','textAnim','add');
                 //alert ("more than one" + game1Played);
                 showBubble("Ok, concentrate this time, you can do it!");
-            }, false);  
+            }, false); 
+            console.log("another attempt"); 
 		}
-		startAccelWatch();
 
-		var myTimer = new gameTimer(60);
+        startAccelWatch();
+
+		var myTimer = new gameTimer(10);
         myTimer.attachCallback(function(count) {
                 countdown = count;
                 originalCount = this.originalCount;
@@ -72,18 +85,16 @@ showGame = function() {
                 timefraction = ((countdown/originalCount)*100)*.01;
                 timefractionR = timefraction.toFixed(2);
                 // aninmate graph to reflect countdown value
-                innerShape.transition()
-                .duration(500)
-                .call(arcTween, timefractionR * τ, innerArc); 
+                moveDials(innerShape, timefractionR, innerArc);
         });
         myTimer.start();
-        game1Played++;       
+        played++;       
 
 
 
 }
 
-moveDials = function() {
+setDials = function() {
     //Set the outer dial to reflect points bonus
     var l = ((pointIncr/5)*100)*.01;
     lazyDial = l.toFixed(2);
@@ -105,15 +116,17 @@ moveDials = function() {
 
    if (!ln) { 
         // Calling arcTween function of D3 (graph.js) code. to animate arcs
-        outerShape.transition()
-        .duration(1000)
-        .call(arcTween, lazyDial * τ, outerArc);
-        //}
-        midShape.transition()
-        .duration(500)
-        .call(arcTween, pointsDial * τ, midArc);
+        moveDials(outerShape, lazyDial, outerArc);
+        moveDials(midShape, pointsDial, midArc);
+ 
  
    }        
+}
+
+moveDials = function(shape, pos, arc) {
+        shape.transition()
+        .duration(1000)
+        .call(arcTween, pos * τ, arc);
 }
 
 endGameOne = function() {
@@ -122,17 +135,24 @@ endGameOne = function() {
 	//hide bottom text
 	stats.classList.remove('animate');
 	// main character slides down slightly
-	character.classList.remove('rise');
+    if (played>=2) {
+        character.classList.remove('riseSlightly');
+    } else {
+        character.classList.remove('rise');
+    }
+	
 	character.classList.add('fallSlightly');
 	// stop watching the accelerometer
 	stopAccelWatch();
 	// show restart button
 	textAnimButton.classList.add('buttonDisplayLower');
-    if (Points != 50) {
-        textAnimButton.innerHTML = "Try Again";
-    } else {
+    if (Points >= 50) {
         textAnimButton.innerHTML = "Next";
+    } else {
+        textAnimButton.innerHTML = "Try Again";    
     }
     Points = 0;
     gameStart = false;
 }
+
+

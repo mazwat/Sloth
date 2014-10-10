@@ -11,4 +11,11 @@
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+    <preference name="DisallowOverscroll" value="true" />
+     <preference name="FadeSplashScreenDuration" value="8" />
+
+
+
+
+
 </widget>
