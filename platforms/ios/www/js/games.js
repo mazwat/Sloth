@@ -54,7 +54,7 @@ showGame = function() {
             character.addEventListener('webkitAnimationEnd',function(event) {
                 triggerClassEvent('stats','animate','add');
                 triggerClassEvent('graph','animate','add');
-                triggerClassEvent('textAnimButton','textAnim','add');
+                triggerClassEvent('textAnimButton','textAnim','add'); 
                 //alert ("first" + game1Played);
                 showBubble("Reach a target of 50 points in a minute. Use my belly meter to learn. Go!");
             }, false);
@@ -77,7 +77,7 @@ showGame = function() {
 
         startAccelWatch();
 
-		var myTimer = new gameTimer(10);
+		var myTimer = new gameTimer(60);
         myTimer.attachCallback(function(count) {
                 countdown = count;
                 originalCount = this.originalCount;
@@ -88,7 +88,8 @@ showGame = function() {
                 moveDials(innerShape, timefractionR, innerArc);
         });
         myTimer.start();
-        played++;       
+        played++; 
+
 
 
 

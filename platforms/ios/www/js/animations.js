@@ -53,3 +53,13 @@ bounceGraph = function() {
 		svgBox.classList.remove('bounce');
 	}, false);
 }
+
+flashGraph = function() {
+    var graph = document.getElementById("graph");
+    var svgList = graph.getElementsByTagName('circle');
+    var circleBox = svgList[0];
+    circleBox.classList.add('fadeInOut');
+	circleBox.addEventListener('webkitAnimationEnd',function(event) {
+		circleBox.classList.remove('fadeInOut');
+	}, false);
+}

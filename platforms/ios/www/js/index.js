@@ -26,7 +26,7 @@
         }
         // setTimeout(function() {
         //     navigator.splashscreen.hide();
-        //     displayAnim();
+        //     
         // }, 1500);
 
 }
@@ -42,6 +42,7 @@ function onResume() {
 function stopPressing() {
     // To stop player pressing screen when playing.
     if (gameStart) {
-       showBubble("Stop pressing and play!"); 
+        showBubble("Stop pressing and play!");
+        flashGraph();
     }
 }

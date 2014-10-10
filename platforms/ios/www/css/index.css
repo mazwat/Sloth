@@ -64,7 +64,7 @@ body {
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */ 
 
 
-    background:url(../img/bg.png) repeat-x;
+    background:url(../img/bg.png) repeat-x top;
   
     background-attachment:fixed;
     font-family:'face_your_fearsregular', Helvetica, Arial, sans-serif;
@@ -118,7 +118,7 @@ h1 {
 
 }
 
-.textAnim, #textAnimButton, #stats, #graph {  
+.textAnim, #textAnimButton, #stats, #graph, circle {  
     display:none;
 }
 
@@ -242,9 +242,16 @@ color: #666;
 }
 
 #speech.display {
-    animation:inOut 5000ms 1;
+    animation:inOut 5000ms 1 ;
     -webkit-animation:inOut 5000ms 1;
     display: block;
+}
+
+.fadeInOut {
+    display: block;
+    animation:inOut 800ms 1 ease-out;
+    -webkit-animation:inOut 800ms 1 ease-out;
+   
 }
 
 
@@ -308,19 +315,20 @@ color: #666;
     50% { opacity: 1; }
     to { opacity: 0; }
 }
-
-@keyframes eyeblink {
-    0%{ opacity: 1; }
-    95% { opacity: 1; }
-    97% { opacity: 0; }
-    100% { opacity: 0; }
+@keyframes shake {
+ 10%{ padding-left: 1px; }
+    25% { padding-top: 2px; }
+    50% { padding-left: 3px; }
+    75% { padding-top: 0px; }
+    100% { padding-left: 0px; }
 }
  
-@-webkit-keyframes eyeblink {
-    0%{ opacity: 1; }
-    95% { opacity: 1; }
-    97% { opacity: 0; }
-    100% { opacity: 0; }
+@-webkit-keyframes shake {
+    10%{ padding-left: 1px; }
+    25% { padding-top: 2px; }
+    50% { padding-left: 3px; }
+    75% { padding-top: 0px; }
+    100% { padding-left: 0px; }
 }
 
 
@@ -376,8 +384,13 @@ color: #666;
 
 @keyframes inOut {
     0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+ 
+@-webkit-keyframes inOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
     100% { opacity: 0; }
 }
 
@@ -390,18 +403,6 @@ color: #666;
 @keyframes scaleInOut {
     0% { transform:scale(1,1); }
     50% { transform:scale(1.1,1.1); }
-}
- 
-@-webkit-keyframes inOut {
-    0% { opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; }
-}
-.eyes {
-    animation:eyeblink 3000ms infinite;
-    -webkit-animation:eyeblink 3000ms infinite;
-    fill: orange;
 }
  
 #stats {

@@ -35,6 +35,8 @@ var svg = d3.select("#graph").append("svg")
     .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
 
+
+
     
 
 // Add the background arc, from 0 to 100% (τ).
@@ -60,6 +62,11 @@ var outerShape = svg.append("path")
     .style("fill", "#971D9B")
     .attr("d", innerArc);
 
+var circle = svg.append("circle")
+    .style("fill", "#971D9B")
+    .attr("r", 85);
+
+
 // Creates a tween on the specified transition's "d" attribute, transitioning
 // any selected arcs from their current angle to the specified new angle.
 function arcTween(transition, newAngle, arcName) {
@@ -76,38 +83,4 @@ function arcTween(transition, newAngle, arcName) {
     };
   });
 }
-
-
-// code for bounce
-
-// var box = d3.select("#frame")
-//           .append("svg")
-//           .attr("width", 900)
-//           .attr("height", 600);
-
-// box.append("circle")
-//    .style("stroke", "white")
-//    .attr("r", 40)
-//    .attr("cx", 150)
-//    .attr("cy", 150)
-//    .on("mouseover", bounce);
-   //.on("mouseout", bounce);
-
-// function bounce() {
-//   alert("object rollover: "+this);
-//   d3.select(this)
-//     .transition()
-//     .attr("r", r+10)
-//     .duration(200)
-//     .ease("cubic-out")
-//     .each("end", bounceBack);
-// }
-
-// function bounceBack() {
-//     d3.select(this)
-//        .transition()
-//        .attr("r", 150)
-//        .duration(200)
-//        .ease("cubic-out");
-// }
 

@@ -103,6 +103,7 @@
                     if (lazy) {
                         //alert("Don't cheat by putting it down!\n You lose 2 points");
                         showBubble("Don't cheat by putting it down!<br><span class='bonus'>You lose 2 points</span>");
+                        flashGraph();
                         // Stop the points going into minus figures
                         if (Points > 2) {
                             Points -= 2;
